@@ -99,40 +99,12 @@
      (lower-bound-v2 :co2 {:co2 {:low 0.1}}))
 
 
-(comment
-  ;; BONUS EXERCISE
-  ;; Do the same for `upper-bound-v2`
-  #_(defn upper-bound-v2
-      'FIX
-      'FIX)
-
-  #_(= (upper-bound    :co2)
-       (upper-bound-v2 :co2)
-       (upper-bound-v2 :co2 tolerances)
-       (upper-bound-v2 :co2 {:co2 {:low 0.1}}))
-  )
-
-
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; A tiny bit of "De-structuring"
 ;; - For convenient access to items in collections.
 ;;
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(comment
-  ;; If we _shape_ our domain information as a data "structure",
-  ;; can we use our knowledge of the shape to pull it apart;
-  ;; i.e. "destructure" it?
-
-  ;; Yes.
-
-  ;; We use destructuring:
-  ;; - In `let` bindings, to cleanly reach into data
-  ;; - In function arguments, to make the API clean and expressive
-  ;;
-  ;; Here are a couple of commonly-used ways to do it.
-  )
 
 ;; "Positional" De-structuring
 ;;

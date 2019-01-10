@@ -75,24 +75,6 @@ same  ; is defined in the current ns
 
 #_(ns-name *ns*) ; What's the current ns?
 
-(comment
-  ;; PROTIP:
-  ;;
-  ;; Your IDE or text editor would have a convenient shortcut to
-  ;; evaluate any Clojure expression right from your codebase.
-  ;;
-  ;; Some editors allow you to "evaluate in-line", some would
-  ;; tell you to "send to the REPL". Consult the documentation
-  ;; that accompanies your editor's Clojure plugin, to learn
-  ;; how to do this.
-  ;;
-  ;; Make a habit of interacting "dynamically" with Clojure
-  ;; this way, right from inside your codebase; i.e. prefer
-  ;;_not_ to type things directly into the REPL.
-  )
-
-
-
 ;; Clojure expression syntax rules:
 
 ;; - Literals:
@@ -184,21 +166,6 @@ same  ; is defined in the current ns
 ;; (+ 1 2 '(+ 1 2)) ; un-comment and evaluate; then comment it back
 
 
-(comment
-  ;; PROTIP:
-  ;;
-  ;; The special "#_" syntax is called a "reader macro".
-  ;;
-  ;; For now, ignore what that means, just know the effect of
-  ;; using it. You will see #_ often in code to follow.
-  ;;
-  ;; Incidentally, the single quote we used '(to mark a list)
-  ;; is also a reader macro. Many more specialized reader macros
-  ;; are available, but don't go there just yet.
-  )
-
-
-
 ;; Why is Clojure a Lisp ("LISt Processing") language?
 
 '(+ 1 2) ; Recall: this is a Clojure list, that Clojure evaluates
@@ -221,21 +188,6 @@ same  ; is defined in the current ns
 
 ;;[1] [2] [3]              [4]
 (defn hie [person message] (str "Hie, " person " : " message)) ; [5]
-
-(comment
-  ;; Here:
-  ;; - [1] `defn` is a Clojure built-in primitive
-  ;;   - Notice, it's at the 1st position, and
-  ;;   - 2-4 are all arguments to defn
-  ;; Further:
-  ;; - [2] is a Clojure symbol, `hello`, which will name the function
-  ;; - [3] is a Clojure vector of two named arguments
-  ;; - [4] is a Clojure s-expression, and is treated as the body of
-  ;;       the function definition
-  ;; - [5] the whole thing itself is a Clojure s-expression!
-  )
-
-
 ;; RECAP:
 ;;
 ;; - All Clojure code is a bunch of "expressions"

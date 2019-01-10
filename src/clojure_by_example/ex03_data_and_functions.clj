@@ -45,39 +45,6 @@
 ;; Let's colonize planets!
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(comment
-  ;; BACKGROUND
-  ;;
-  ;; The Office of Interstellar Affairs (OIA) is pushing hard
-  ;; for all-out space exploration and colonization.
-  ;;
-  ;; The OIA intends to issue "mission directives"...
-  ;;
-  ;; They wish humanity to :inhabit, or :colonise, or :probe,
-  ;; or :observe a given planet based on their analysis of
-  ;; available planetary data.
-  ;;
-  ;; For a given "mission directive", like :probe, the OIA
-  ;; intends to dispatch a collection of vessels.
-
-  ;; GOAL
-  ;;
-  ;; Prototype a bit of planetary analysis logic, using criteria
-  ;; that interest the OIA, such that they will be able to decide
-  ;; what to do about a given planet.
-  ;;
-  ;; Criteria include questions like:
-  ;; - co2-tolerable?
-  ;; - gravity-tolerable?
-  ;; - surface-temp-tolerable?
-  ;;
-  ;; How a planet stands up to such questions will let us assess
-  ;; whether it is habitable? or colonisable? or observe-only?.
-  ;;
-  ;; Once we deliver the OIA our assessment, they may choose to
-  ;; dispatch one or more kinds of Starfleet vessels to the planet.
-  )
-
 ;; Here are some target planets:
 clojure-by-example.data.planets/target-planets
 

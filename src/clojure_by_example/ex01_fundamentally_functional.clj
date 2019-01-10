@@ -103,17 +103,6 @@
 ;;
 #_(clojure.repl/source identity)
 ;;
-(comment
-  ;; This is another example of what "dynamic" means.
-  ;; We can not only can we interact live with small bits of
-  ;; our Clojure programs, we can also examine many aspects
-  ;; of our programs at run time. The clojure.repl namespace
-  ;; is one tool at our disposal. Try these in the REPL:
-  #_(clojure.repl/dir clojure.repl)
-  #_(clojure.repl/doc clojure.repl)
-  )
-
-
 ;; "Higher order" functions (HoFs):
 
 ;; Functions that:
@@ -153,17 +142,6 @@
 
 
 ;; Composing Logic with Higher-order Functions (HoFs):
-(comment
-  ;; Clojure programmers often write simple functions that
-  ;; each do one task well, and use higher order functions
-  ;; to "compose" these in creative ways, to produce more
-  ;; useful pieces of logic.
-  ;;
-  ;; We treat "simple" functions as building blocks, and
-  ;; HoFs as versatile mini-blueprints that help us organize
-  ;; and glue together the simple functions.
-  )
-
 ;; EXERCISE
 ;; Reason about why this is working:
 
@@ -195,19 +173,6 @@
    (vec (str (inc 41)))
    ('FIX 'FIX))
 
-(comment
-  ;; Reason about the order of evaluation and how inputs
-  ;; and outputs should connect, for `comp` chains to
-  ;; work correctly.
-  ;;
-  ;; To see if you reasoned correctly, try each of
-  ;; seq, str, inc independently:
-  (inc 41)                ; increment a number
-  (str 42)                ; turn the input into a string
-  (seq "42")              ; turns a string into a character sequence
-  )
-
-
 ;; EXERCISE
 ;; Use `(complement string?)` to make the following true
 ;; - `complement` accepts a "predicate" function, and returns a
@@ -215,34 +180,9 @@
 (= (not (string? "hi"))
    ('FIX 'FIX))
 
-(comment
-  ;; "Predicate" is just a term we use to conveniently describe
-  ;; any function that returns a truthy/falsey value, i.e.
-  ;; any function that is used to test for some condition.
-  ;; These so-called "predicates" are not inherently special.
-)
-
-
-
 ;; "Lexical Scope" in Clojure
 ;; - Lexical scope guarantees that the reference to a value will be
 ;;   "enclosed" in the scope in which it is being used.
-
-(comment
-  ;; Strict lexical scope greatly simplifies our life, because
-  ;; it allows us to mechanically follow code, and determine
-  ;; where a value originated.
-  ;; - Start at the place of reference of the value.
-  ;; - Then "walk" outwards, until you meet the very first let binding,
-  ;;   or arg-list, or def, where the value was bound.
-  ;; - Now you know where the value came from.
-  ;;
-  ;; This also helps reduce our mental burden of inventing
-  ;; new names to refer to things, because we can re-use
-  ;; a name within a limited scope, and be certain that
-  ;; it will not destroy anything with the same name outside
-  ;; the given scope.
-  )
 
 ;; EXERCISE:
 ;; - Develop an intuition for what "Lexical scope" might mean
@@ -341,21 +281,6 @@
 #_(= (scale-by-PI 10)
      ('FIX 10)
      (* PI 10))
-
-(comment
-  ;; BONUS EXERCISES
-  ;; Define a few scaling functions, in terms of `scale-by`
-  ;;
-  (def scale-by-PI-v2
-    'FIX)
-
-  (def quadruple
-    "4x the given number."
-    'FIX)
-
-  (def halve
-    'FIX))
-
 
 ;; Sequences (or Collections)
 ;;
