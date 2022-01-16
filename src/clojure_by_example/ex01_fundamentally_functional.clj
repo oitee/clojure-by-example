@@ -78,7 +78,7 @@
 ;; - Then replace 'FIX with your solution and evaluate to confirm.
 ;; - Think about the little experiment you just performed, and
 ;;   form a theory about why the solution worked
-(= 'FIX
+(= clojure-by-example.ex00-introduction/same
    (same same)
    ((fn [x] x) same))
 
@@ -95,13 +95,19 @@
 ;; - Note: Functions are values and can therefore be compared.
 ;;
 (= identity
-   ('FIX identity)
-   ('FIX identity)
-   ('FIX identity))
+   (same identity)
+   ((fn [x] x) identity)
+   (identity identity))
 ;;
 ;; Now, evaluate this in the REPL to _see_ the truth:
 ;;
 #_(clojure.repl/source identity)
+
+(println ["\"foo\"" 1 2])
+
+(clojure.repl/source clojure.repl/source)
+
+(clojure.repl/source same)
 ;;
 (comment
   ;; This is another example of what "dynamic" means.
@@ -110,8 +116,7 @@
   ;; of our programs at run time. The clojure.repl namespace
   ;; is one tool at our disposal. Try these in the REPL:
   #_(clojure.repl/dir clojure.repl)
-  #_(clojure.repl/doc clojure.repl)
-  )
+  #_(clojure.repl/doc same))
 
 
 ;; "Higher order" functions (HoFs):
@@ -126,13 +131,14 @@
 ;; EXERCISE
 ;; Have we seen HoFs so far? If yes, list them out below.
 
+;; ((fn [x] x) same)
 
 ;; EXERCISE
 ;; Write a zero-argument function that returns the `identity` function
 
 (defn gen-identity
   [] ; zero arguments
-  'FIX)
+  identity)
 
 ;; EXERCISE
 ;; Fix this function so that it returns a function that _behaves_
@@ -140,20 +146,21 @@
 
 (defn gen-identity-v2
   []
-  'FIX)
+  (fn [x] x))
 
+(gen-identity-v2)
 ;; EXERCISE
 ;; Replace 'FIX1 with a call to the `gen-identity` function,
 ;; and 'FIX2 with a call to the `gen-identity-v2` function,
 ;; such that the following evaluates to true.
 
 (= identity
-   'FIX1
-   'FIX2)
+   (gen-identity)
+   ((gen-identity-v2) identity))
 
 
 ;; Composing Logic with Higher-order Functions (HoFs):
-(comment
+(comment)
   ;; Clojure programmers often write simple functions that
   ;; each do one task well, and use higher order functions
   ;; to "compose" these in creative ways, to produce more
@@ -162,7 +169,7 @@
   ;; We treat "simple" functions as building blocks, and
   ;; HoFs as versatile mini-blueprints that help us organize
   ;; and glue together the simple functions.
-  )
+  
 
 ;; EXERCISE
 ;; Reason about why this is working:
@@ -193,7 +200,7 @@
 
 (= [\4 \2]
    (vec (str (inc 41)))
-   ('FIX 'FIX))
+   ((comp vec str inc) 41))
 
 (comment
   ;; Reason about the order of evaluation and how inputs
@@ -204,8 +211,8 @@
   ;; seq, str, inc independently:
   (inc 41)                ; increment a number
   (str 42)                ; turn the input into a string
-  (seq "42")              ; turns a string into a character sequence
-  )
+  (seq "42"))              ; turns a string into a character sequence
+  
 
 
 ;; EXERCISE
@@ -213,14 +220,17 @@
 ;; - `complement` accepts a "predicate" function, and returns a
 ;;   function that does the opposite of the given "predicate"
 (= (not (string? "hi"))
-   ('FIX 'FIX))
+   ((complement string?) "hi"))
 
-(comment
+(comment)
   ;; "Predicate" is just a term we use to conveniently describe
   ;; any function that returns a truthy/falsey value, i.e.
   ;; any function that is used to test for some condition.
   ;; These so-called "predicates" are not inherently special.
-)
+  
+
+((fn [x y] (+ x y)) 1 2)
+
 
 
 
@@ -228,7 +238,7 @@
 ;; - Lexical scope guarantees that the reference to a value will be
 ;;   "enclosed" in the scope in which it is being used.
 
-(comment
+(comment)
   ;; Strict lexical scope greatly simplifies our life, because
   ;; it allows us to mechanically follow code, and determine
   ;; where a value originated.
@@ -242,7 +252,7 @@
   ;; a name within a limited scope, and be certain that
   ;; it will not destroy anything with the same name outside
   ;; the given scope.
-  )
+  
 
 ;; EXERCISE:
 ;; - Develop an intuition for what "Lexical scope" might mean
@@ -334,27 +344,36 @@
   [x]
   (fn [y] (* y x))) ; whatever is passed as `x` is captured
                     ; within the body of the returned function
-
+scale-by
 
 ;; EXERCISE
 ;;
-#_(= (scale-by-PI 10)
-     ('FIX 10)
-     (* PI 10))
+(= (scale-by-PI 10)
+   ((scale-by PI) 10)
+   (* PI 10))
 
-(comment
-  ;; BONUS EXERCISES
-  ;; Define a few scaling functions, in terms of `scale-by`
-  ;;
-  (def scale-by-PI-v2
-    'FIX)
+;; BONUS EXERCISES
+;; Define a few scaling functions, in terms of `scale-by`
+;;
+(def scale-by-PI-v2
+  (scale-by PI))
 
-  (def quadruple
-    "4x the given number."
-    'FIX)
+(scale-by-PI-v2 1)
 
-  (def halve
-    'FIX))
+
+(def quadruple
+  "4x the given number."
+  (scale-by 4))
+
+(quadruple 5)
+
+(def halve
+  (scale-by 0.5))
+(halve 10)
+
+
+  
+  
 
 
 ;; Sequences (or Collections)

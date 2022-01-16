@@ -71,10 +71,10 @@
 ;; - Use `get` to extract :traces from `earth-alt`'s atmosphere
 ;; - The use `get-in` to do the same
 
-#_(get 'FIX
-       'FIX)
+(get (get earth-alt :atmosphere)
+       :traces)
 
-#_(get-in 'FIX 'FIX)
+(get-in earth-alt [:atmosphere :traces])
 
 
 ;; BUT, unlike plain old strings, keywords also behave as
@@ -89,7 +89,7 @@
 ;; EXERCISE
 ;; Extract `:argon` from the `:atmosphere` of `earth-alt`
 
-('FIX ('FIX earth-alt))
+(:traces (:atmosphere earth-alt))
 
 
 ;; Which means we can use keywords in this manner:
@@ -115,9 +115,9 @@
 
 (defn less-mass-than-earth?
   [planet]
-  (< ('FIX planet) 1))
+  (< (:mass planet) 1))
 
-('FIX 'FIX 'FIX)
+(filter less-mass-than-earth? planets)
 
 
 ;; EXERCISE
@@ -139,6 +139,8 @@
 ;; Maps can "self-look-up" keys
 
 ({:a "a", :b "b"} :a)
+
+
 
 ;; Vectors can "self-look-up" by index position
 
@@ -164,7 +166,7 @@
 
 (def poison-gas?
   "Does the given gas belong to a set of known poison gases?"
-  'FIX)
+  #{:carbon-monoxide :chlorine, :helium :sulphur-dioxide, :hydrogen-chloride})
 
 (poison-gas? :chlorine)                 ; truthy
 (poison-gas? :oxygen)                   ; falsey

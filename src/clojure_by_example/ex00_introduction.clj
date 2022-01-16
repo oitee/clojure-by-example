@@ -39,11 +39,55 @@ nil                           ; yes, nil is a value
 #{1 2 3 4 5}                  ; a hash-set
 '(1 2 3 4 5)                  ; a list
 
+
+{:a 1 :b }
+(vector 1 2 3 4)
+(hash-map :a 1
+
+
+
+
+          :b           
+          2)
+
 ;; - "Built-in" functions:
 +                             ; addition
 map                           ; map over a collection
 filter                        ; filter from a collection
 reduce                        ; transform a collection
+
+(+ 1/2 1/2);qwerty
+
+(comment
+  ;; = + - Example 1 = 
+; qwerty
+  (+)
+  ;;=> 0
+
+  (+ 1)
+  ;;=> 1
+
+  (+ -10)
+  ;;=> -10
+
+  (+ 1 2)
+  ;;=> 3
+
+  (+ 1 2 3)
+  ;;=> 6
+
+  (+ 1/2 1/2)
+  ;;=> 1N
+
+  (apply + (range 10000000000000 10000000001000))
+  ;; ArithmeticException: integer overflow
+  ;; See also:
+  +'
+  *
+  -
+  unchecked-add
+  inc
+  )
 
 ;; - "Symbolic" expressions (or "s"-expression or s-expr)
 
@@ -51,14 +95,21 @@ reduce                        ; transform a collection
 
 (+ (+ 1 2) (+ 1 2))           ; an s-expr of nested s-exprs
 
-(+ (+ (+ 1 2) (+ 1 2))
-   (+ (+ 1 2) (+ 1 2)))       ; an even more nested s-expr
+(+ (+ (+ 1 
+         2) 
+      (+ 1 2))
+   (+ (+ 1 2) 
+      (+ 1 2)))       ; an even more nested s-expr
 
 (defn same
   [x]
   x)                          ; function definitions are also s-exprs
+'same
 
-
+(supers (class same))
+(supers (class 'same))
+(supers (class "same"))
+(= same same)
 ;; Namespaces:
 ;;
 ;; - are how we organize and/or modularise code
@@ -169,7 +220,7 @@ same  ; is defined in the current ns
 ;; - Leave an s-expression in-line, but remove it from
 ;;   the evaluation path, by prefixing it with `#_`:
 
-(+ 1 2 #_(+ 1 2))  ; will evaluate to 3
+(+ 1 2 '(+ 2 2))  ; will evaluate to 3
 
 ;; - Comment out entirely, by prefixing code with one or more
 ;;   semicolons, just like in-line comments.
@@ -222,6 +273,10 @@ same  ; is defined in the current ns
 
 ;;[1] [2] [3]              [4]
 (defn hie [person message] (str "Hie, " person " : " message)) ; [5]
+
+(defn foo [arg] arg (+ 1 2))
+
+(foo foo)
 
 (comment
   ;; Here:
