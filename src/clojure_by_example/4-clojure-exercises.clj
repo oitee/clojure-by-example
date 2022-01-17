@@ -6,7 +6,7 @@
 
 (defn second-last [xs]
   (get xs (- (count xs) 2)))
-;;! this does not work with lists
+;; this does not work with lists
 ;; because 'nth' works with lists and 'get' does not
 
 (second-last [1 2 3])
@@ -76,17 +76,77 @@
 ;; returns true iff the map contains an entry with that key and its value is nil.
 
 (defn contains-nil
-[k, m]
+  [k, m]
   (if (contains? m k)
     (nil? (get m k))
     false))
 
 (contains-nil :a {:a "a" :b "b"})
 (contains-nil "a" {"a" "aa", :b "b"})
-(contains-nil :a {:b "bee" :a nil })
+(contains-nil :a {:b "bee" :a nil})
 
 (contains? {:a "a" "b" "bee"} "b")
 
 
+;; Problem 27
+;;Write a function which returns true if the given sequence is a palindrome. 
+;;Hint: "racecar" does not equal '(\r \a \c \e \c \a \r)
 
- 
+(defn is-palindrome 
+  [xs]
+  (let [xs-collection (if (string? xs)
+                        (clojure.string/split xs #"")
+                        xs)]
+    (= (reverse xs-collection) xs-collection)))
+
+(is-palindrome [1 2 3 2 1])
+(is-palindrome "madam")
+(is-palindrome "123")
+(is-palindrome "racecar")
+
+
+;; Alternative Solution to Problem 27 (without using `reverse`)
+
+(defn is-palindrome-v2
+ [xs]
+ (let [xs-seq (if 
+           (string? xs)
+            (clojure.string/split xs #"")
+            xs)]
+   (if (zero? (count xs-seq))
+     true 
+     (if (= (first xs-seq) (last xs-seq))
+            (is-palindrome-v2
+             (rest (take (- (count xs-seq) 1) xs-seq)))
+            false))))
+
+
+
+(is-palindrome-v2 [1 2 3 2 1])
+(is-palindrome-v2 [1 2])
+(is-palindrome-v2 "madam")
+(is-palindrome-v2 "racecar")
+(is-palindrome-v2 "raceca1")
+
+
+;; Problem 26
+;; Write a function which returns the first X fibonacci numbers.
+
+(defn fibonacci
+  [n]
+  (if (= n 1)
+    '(1)
+    (if (= n 2)
+      '(1 1)
+      (let [latest (fibonacci (- n 1))
+            size (count latest)
+            last-element (nth latest (- size 1))
+            second-last-element (nth latest (- size 2))
+            new-element (+ last-element second-last-element)]
+        (conj (vec latest) new-element)
+        ))))
+
+(= (fibonacci 8) '(1 1 2 3 5 8 13 21))
+(= '(1 2 3 4) (conj (vec '(1 2 3)) 4))
+
+
