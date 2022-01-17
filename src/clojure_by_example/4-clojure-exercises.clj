@@ -45,7 +45,7 @@
 ;; The some function takes a predicate function and a collection. 
 ;; It returns the first logical true value of (predicate x) where x is an item in the collection.
 
-(defn my-some 
+(defn my-some
   [f xs]
   (if (zero? (count xs)) nil
       (if (f (first xs))
@@ -62,3 +62,31 @@
 (= (my-some #{2 7 6} [5 6 7 8]) (some #{2 7 6} [5 6 7 8]))
 
 
+;; Problem 57
+;; A recursive function is a function which calls itself. 
+;; This is one of the fundamental techniques used in functional programming.
+;; Problem:
+(comment (= __ ((fn foo [x] (when (> x 0) (conj (foo (dec x)) x))) 5)))
+
+;; answer:
+'(5 4 3 2 1)
+
+;; Problem 134
+;; Write a function which, given a key and map, 
+;; returns true iff the map contains an entry with that key and its value is nil.
+
+(defn contains-nil
+[k, m]
+  (if (contains? m k)
+    (nil? (get m k))
+    false))
+
+(contains-nil :a {:a "a" :b "b"})
+(contains-nil "a" {"a" "aa", :b "b"})
+(contains-nil :a {:b "bee" :a nil })
+
+(contains? {:a "a" "b" "bee"} "b")
+
+
+
+ 
